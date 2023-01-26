@@ -12,6 +12,12 @@ export OP_BUILD_PATH=$PWD
 git clone https://github.com/coolsnowwolf/lede.git
 
 cd "${OP_BUILD_PATH}"/lede || exit
+
+sed -i "/helloworld/d" "feeds.conf.default"
+echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
+./scripts/feeds update helloworld
+./scripts/feeds install -a -f -p helloworld
+
 ./scripts/feeds update -a && ./scripts/feeds install -a
 rm -rf ./tmp && rm -rf .config
 mv "${OP_BUILD_PATH}"/.config "${OP_BUILD_PATH}"/lede/.config
