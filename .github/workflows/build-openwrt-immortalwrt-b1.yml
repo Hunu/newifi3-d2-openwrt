@@ -41,13 +41,31 @@ jobs:
           sudo apt-get -qq autoremove --purge
           sudo apt-get -qq clean
 
+      - name: Upload Buildsh
+        uses: actions/upload-artifact@v3
+        with:
+          name: Newifi3-d2-build-${{ env.FILE_DATE }}
+          path: build.sh
+
+
       - name: Build Immortalwrt
         run: |
           chmod +x build.sh && ./build.sh
           
       - name: List dir
         run: |
+          echo "\n1\n"
           ls /home/runner/work/newifi3-d2-openwrt/newifi3-d2-openwrt/
+          echo "\n2\n"
+          ls /home/runner/work/newifi3-d2-openwrt/newifi3-d2-openwrt/lede/
+          echo "\n3\n"
+          ls /home/runner/work/newifi3-d2-openwrt/newifi3-d2-openwrt/lede/bin/
+          echo "\n4\n"
+          ls /home/runner/work/newifi3-d2-openwrt/newifi3-d2-openwrt/lede/bin/targets/
+          echo "\n5\n"
+          ls /home/runner/work/newifi3-d2-openwrt/newifi3-d2-openwrt/lede/bin/targets/ramips/
+          echo "\n6\n"
+          ls /home/runner/work/newifi3-d2-openwrt/newifi3-d2-openwrt/lede/bin/targets/ramips/mt7621/
 
       - name: Upload Packages
         uses: actions/upload-artifact@v3
